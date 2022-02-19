@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Nimbus.  If not, see <http://www.gnu.org/licenses/>.
 
-//! Block executive to be used by relay chain validators when validating parachain blocks built
+//! Block executive to be used by relay chain validators when validating allychain blocks built
 //! with the nimubs consensus family.
 
 use frame_support::traits::ExecuteBlock;
@@ -25,7 +25,7 @@ use sp_runtime::{RuntimeAppPublic, generic::DigestItem};
 use nimbus_primitives::{NIMBUS_ENGINE_ID, NimbusId, digests::CompatibleDigestItem};
 use sp_application_crypto::Public as _;
 
-/// Block executive to be used by relay chain validators when validating parachain blocks built
+/// Block executive to be used by relay chain validators when validating allychain blocks built
 /// with the nimubs consensus family.
 ///
 /// This will strip the seal digest, and confirm that it contains a valid signature
@@ -35,7 +35,7 @@ use sp_application_crypto::Public as _;
 /// TODO Degisn improvement:
 /// Can we share code with the verifier?
 /// Can this struct take a verifier as an associated type?
-/// Or maybe this will just get simpler in general when https://github.com/paritytech/polkadot/issues/2888 lands
+/// Or maybe this will just get simpler in general when https://github.com/paritytech/axia/issues/2888 lands
 pub struct BlockExecutor<T, I>(sp_std::marker::PhantomData<(T, I)>);
 
 impl<Block, T, I> ExecuteBlock<Block> for BlockExecutor<T, I>

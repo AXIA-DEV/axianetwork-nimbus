@@ -26,7 +26,7 @@ use sc_consensus_manual_seal::{ConsensusDataProvider, Error};
 use sp_api::{TransactionFor, ProvideRuntimeApi, HeaderT};
 use sp_inherents::InherentData;
 use nimbus_primitives::{AuthorFilterAPI, NimbusApi, NimbusId, CompatibleDigestItem, NIMBUS_ENGINE_ID};
-use cumulus_primitives_parachain_inherent::{ParachainInherentData, INHERENT_IDENTIFIER as PARACHAIN_INHERENT_IDENTIFIER};
+use cumulus_primitives_allychain_inherent::{AllychainInherentData, INHERENT_IDENTIFIER as ALLYCHAIN_INHERENT_IDENTIFIER};
 
 /// Provides nimbus-compatible pre-runtime digests for use with manual seal consensus
 pub struct NimbusManualSealConsensusDataProvider<C> {
@@ -53,11 +53,11 @@ where
 		parent: &B::Header,
 		inherents: &InherentData,
 	) -> Result<DigestFor<B>, Error> {
-		// Retrieve the relay chain block number to use as the slot number from the parachain inherent
+		// Retrieve the relay chain block number to use as the slot number from the allychain inherent
 		let slot_number = inherents
-			.get_data::<ParachainInherentData>(&PARACHAIN_INHERENT_IDENTIFIER)
-			.expect("Parachain inherent should decode correctly")
-			.expect("Parachain inherent should be present because we are mocking it")
+			.get_data::<AllychainInherentData>(&ALLYCHAIN_INHERENT_IDENTIFIER)
+			.expect("Allychain inherent should decode correctly")
+			.expect("Allychain inherent should be present because we are mocking it")
 			.validation_data
 			.relay_parent_number;
 
